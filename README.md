@@ -6,7 +6,8 @@ Play with **2 or 3 people on one device**. Roll animated dice, hold your favorit
 
 **Created By Devarsh Muthe**
 
-> **Play online:** Add your GitHub Pages link here after publishing (for example, `https://YOUR-USERNAME.github.io/yahtzee-local/`).
+**Play online:**
+(https://github.com/DESPITEOFIT/yahtzee-local)
 
 ## 📸 Screenshots
 
@@ -32,8 +33,6 @@ Play with **2 or 3 people on one device**. Roll animated dice, hold your favorit
 ![Game settings, themes, and sound options](screenshots/settings.png)
 
 </details>
-
-> The screenshot paths above are relative to the repository. Add the image files to the `screenshots/` folder using **these exact names** before publishing the README, or remove any image references you haven't captured yet.
 
 ## ✨ Features
 
@@ -150,32 +149,7 @@ yahtzee-local/
 
 > This is **local pass-and-play multiplayer**, not online real-time multiplayer. A locally downloaded copy can run without an internet connection; the hosted GitHub Pages version needs to load from the website.
 
-## 🌐 Publish with GitHub Pages
-
-1. Push the project files (including `index.html`) to a public GitHub repository named `yahtzee-local`.
-2. In the repository, open **Settings → Pages**.
-3. Under **Build and deployment**, choose **Deploy from a branch**.
-4. Select the **`main`** branch and **`/(root)`** folder, then click **Save**.
-5. Once deployment completes, your game should be available at:
-
-   `https://YOUR-USERNAME.github.io/yahtzee-local/`
-
-Replace `YOUR-USERNAME` with your GitHub username and add the live URL near the top of this README.
-
 GitHub Pages documentation: https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
-
-## ✅ Release checklist
-
-- [ ] Two-player and three-player matches work end to end.
-- [ ] Rolling, holding, Release All, and scoring work correctly.
-- [ ] Bonus and Joker rules produce expected results.
-- [ ] Undo, rematch, and resume-after-refresh work.
-- [ ] Confetti, winner popup, and optional sounds work.
-- [ ] Profiles, match history, rivalries, and achievements update correctly.
-- [ ] Export/import works with a test backup.
-- [ ] Midnight, Casino, and Arcade are readable on desktop and mobile.
-- [ ] All screenshots are added under `screenshots/` with matching filenames.
-- [ ] GitHub Pages link opens the game successfully.
 
 ## 👨‍💻 Author
 
