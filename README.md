@@ -114,7 +114,7 @@ roll-five/
 │   ├── home.png
 │   ├── setup.png
 │   ├── gameplay.png
-│   ├── yahtzee.png
+│   ├── five-of-kind.png
 │   ├── winner.png
 │   ├── statistics.png
 │   ├── rivalries.png
