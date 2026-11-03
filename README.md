@@ -21,7 +21,7 @@ Play with **2 or 3 people on one device**. Roll animated dice, hold your favorit
 
 | Five-of-a-kind celebration | Winner announcement |
 | --- | --- |
-| ![Five-of-a-kind celebration with confetti](screenshots/yahtzee.png) | ![Winner popup and final scores](screenshots/winner.png) |
+| ![Five-of-a-kind celebration with confetti](screenshots/five-of-kind.png) | ![Winner popup and final scores](screenshots/winner.png) |
 
 | Player statistics | Rivalries and achievements |
 | --- | --- |
