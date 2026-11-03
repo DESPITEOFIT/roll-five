@@ -336,7 +336,7 @@ function playApplause(context, startTime) {
           PASS & PLAY · 2–3 PLAYERS · OFFLINE
         </p>
 
-        <h1>🎲 YAHTZEE <span>LOCAL</span></h1>
+        <h1>🎲 ROLL <span>FIVE</span></h1>
 
         <p class="home-tagline">
           Roll the dice. Chase the bonus. Become the champion.
