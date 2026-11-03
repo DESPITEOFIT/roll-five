@@ -1,4 +1,4 @@
-# 🎲 Yahtzee Local
+# 🎲 Roll Five
 
 **A multiplayer, pass-and-play Yahtzee game built with HTML, CSS, and vanilla JavaScript.**
 
@@ -7,19 +7,19 @@ Play with **2 or 3 people on one device**. Roll animated dice, hold your favorit
 **Created By Devarsh Muthe**
 
 **Play online:**
-(https://github.com/DESPITEOFIT/yahtzee-local)
+(https://github.com/DESPITEOFIT/roll-five)
 
 ## 📸 Screenshots
 
 ### Home screen
 
-![Yahtzee Local home screen](screenshots/home.png)
+![Roll Five home screen](screenshots/home.png)
 
 | New match setup | Live gameplay |
 | --- | --- |
 | ![Player selection and profiles](screenshots/setup.png) | ![Dice, controls, and scorecard](screenshots/gameplay.png) |
 
-| Yahtzee celebration | Winner announcement |
+| Five-of-a-kind celebration | Winner announcement |
 | --- | --- |
 | ![Five-of-a-kind celebration with confetti](screenshots/yahtzee.png) | ![Winner popup and final scores](screenshots/winner.png) |
 
@@ -100,7 +100,7 @@ Play with **2 or 3 people on one device**. Roll animated dice, hold your favorit
 No npm installation, database, or backend is required.
 
 1. Clone or download this repository.
-2. Open the `yahtzee-local` folder in VS Code (or another editor).
+2. Open the `roll-five` folder in VS Code (or another editor).
 3. Run `index.html` using a local server such as the **Live Server** VS Code extension.
 4. Open the local address in your browser and play.
 
@@ -109,7 +109,7 @@ You can also open `index.html` directly, but using a local server is recommended
 ## 🗂️ Project structure
 
 ```text
-yahtzee-local/
+roll-five/
 ├── index.html       # Page structure and script loading
 ├── style.css        # Layout, themes, animations, popups
 ├── game.js          # Dice mechanics, scoring, game state
