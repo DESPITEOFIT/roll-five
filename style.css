@@ -1,0 +1,3425 @@
+
+/* ============================================================
+   YAHTZEE LOCAL - VERSION 1.3.3
+   Complete stylesheet
+
+   1. Global styles
+   2. Page layout
+   3. Buttons and inputs
+   4. Game setup
+   5. Turn information
+   6. Dice layout
+   7. Held dice
+   8. Dice animation
+   9. Scoreboard
+   10. Active player
+   11. Score sections and totals
+   12. Score buttons
+   13. Responsive design
+   14. Accessibility
+   ============================================================ */
+
+
+/* ============================================================
+   1. GLOBAL STYLES
+   ============================================================ */
+
+:root {
+  font-family: Inter, system-ui, Arial, sans-serif;
+
+  color: #eaf0ff;
+  background: #0e1425;
+
+  font-synthesis: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 22px;
+}
+
+
+/* ============================================================
+   2. PAGE LAYOUT
+   ============================================================ */
+
+.app {
+  max-width: 1050px;
+  margin: auto;
+}
+
+header,
+.turnbar,
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+header {
+  margin-bottom: 24px;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 4vw, 2.3rem);
+}
+
+h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+header p,
+.hint {
+  color: #aebbd4;
+}
+
+
+/* ============================================================
+   3. BUTTONS AND INPUTS
+   ============================================================ */
+
+button,
+select,
+input {
+  font: inherit;
+  border-radius: 10px;
+  padding: 11px 15px;
+}
+
+button {
+  border: 0;
+  background: #6f7dff;
+  color: white;
+
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  background: #8792ff;
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.secondary {
+  background: #28334d;
+}
+
+select,
+input {
+  width: 100%;
+  background: #101a30;
+  border: 1px solid #4a5672;
+  color: white;
+}
+
+
+/* ============================================================
+   4. GAME SETUP
+   ============================================================ */
+
+.setup {
+  background: #1a243b;
+
+  padding: 24px;
+  border-radius: 18px;
+
+  display: grid;
+  gap: 14px;
+
+  max-width: 480px;
+}
+
+.setup[hidden],
+#game[hidden] {
+  display: none;
+}
+
+.name-input {
+  margin: 8px 0;
+}
+
+
+/* ============================================================
+   5. TURN INFORMATION
+   ============================================================ */
+
+.turnbar {
+  padding: 16px 20px;
+
+  background: #1a243b;
+  border-radius: 14px;
+}
+
+.hint {
+  text-align: center;
+  min-height: 25px;
+  margin: 22px 0;
+}
+
+.actions {
+  justify-content: center;
+  margin-bottom: 26px;
+}
+
+
+/* ============================================================
+   6. DICE LAYOUT
+   ============================================================ */
+
+#dice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-wrap: wrap;
+  gap: 14px;
+
+  margin: 30px 0;
+}
+
+/* Individual dice boxes */
+
+#dice .die {
+  position: relative;
+
+  width: 98px;
+  height: 112px;
+  min-height: 112px;
+
+  padding: 6px 4px 8px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 4px;
+
+  border-radius: 18px;
+  border: 2px solid #d7dce8;
+
+  background: #f3f5fa;
+  color: #273452;
+
+  box-shadow:
+    0 8px 18px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease,
+    background-color 0.18s ease;
+}
+
+/* Hover effect */
+
+#dice .die:not(:disabled):hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 22px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+/* Dice remain visible when disabled */
+
+#dice .die:disabled {
+  opacity: 1;
+}
+
+/* ------------------------------------------------------------
+   LARGER DICE SYMBOLS - MAIN V1.3.3 CHANGE
+   ------------------------------------------------------------ */
+
+#dice .die-face {
+  display: block;
+
+  font-size: 4.7rem;
+  font-weight: 700;
+  line-height: 1;
+
+  color: #273452;
+
+  text-align: center;
+
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   7. HELD DICE DESIGN
+   ============================================================ */
+
+#dice .die.held {
+  background: linear-gradient(
+    180deg,
+    #fff7da 0%,
+    #f6e7b1 100%
+  );
+
+  border-color: #d9b34a;
+
+  box-shadow:
+    0 10px 22px rgba(217, 179, 74, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+/* Keep the held die face readable */
+
+#dice .die.held .die-face {
+  color: #47391a;
+}
+
+/* HELD status badge */
+
+#dice .die-status {
+  min-height: 20px;
+
+  padding: 3px 9px;
+
+  border-radius: 999px;
+
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  line-height: 1;
+
+  color: transparent;
+  background: transparent;
+
+  border: 1px solid transparent;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+/* Badge appears when die is held */
+
+#dice .die-status.visible {
+  color: #6c5314;
+
+  background: rgba(
+    255, 248, 221, 0.95
+  );
+
+  border-color: #d8bc69;
+
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ============================================================
+   8. DICE ROLL ANIMATION
+   ============================================================ */
+
+#dice .die.rolling-die {
+  animation: diceTumble 0.9s ease-in-out both;
+  pointer-events: none;
+}
+
+@keyframes diceTumble {
+
+  0% {
+    transform:
+      translateY(0)
+      rotate(0deg)
+      scale(1);
+  }
+
+  15% {
+    transform:
+      translateY(-18px)
+      rotate(-15deg)
+      scale(0.9);
+  }
+
+  35% {
+    transform:
+      translateY(8px)
+      rotate(22deg)
+      scale(1.08);
+  }
+
+  55% {
+    transform:
+      translateY(-13px)
+      rotate(-18deg)
+      scale(0.95);
+  }
+
+  75% {
+    transform:
+      translateY(5px)
+      rotate(12deg)
+      scale(1.04);
+  }
+
+  90% {
+    transform:
+      translateY(-3px)
+      rotate(-4deg)
+      scale(1.01);
+  }
+
+  100% {
+    transform:
+      translateY(0)
+      rotate(0deg)
+      scale(1);
+  }
+
+}
+
+/* Held dice do not animate */
+
+#dice .die.held {
+  animation: none !important;
+}
+
+
+/* ============================================================
+   9. SCOREBOARD BASE
+   ============================================================ */
+
+.score-scroll {
+  overflow-x: auto;
+
+  border-radius: 14px;
+  border: 1px solid #35435e;
+}
+
+#score-table {
+  width: 100%;
+  min-width: 480px;
+
+  border-collapse: collapse;
+
+  background: #1a243b;
+
+  font-variant-numeric: tabular-nums;
+}
+
+#score-table th,
+#score-table td {
+  border-bottom: 1px solid #34415b;
+
+  padding: 12px;
+  text-align: center;
+
+  transition: background-color 0.2s ease;
+}
+
+#score-table th:first-child,
+#score-table td:first-child {
+  text-align: left;
+  width: 36%;
+}
+
+#score-table th {
+  background: #27344f;
+}
+
+#score-table .category-cell {
+  text-align: left;
+}
+
+/* Highlight hovered rows */
+
+#score-table tbody tr:not(.section-heading):hover td {
+  background-color: #30405f;
+}
+
+
+/* ============================================================
+   10. ACTIVE PLAYER COLUMN
+   ============================================================ */
+
+/* Active player header */
+
+#score-table th.active-col {
+  background-color: #334a85;
+  color: #c9d8ff;
+
+  font-weight: 700;
+
+  box-shadow:
+    inset 0 -3px 0 #799dff;
+}
+
+/* Active player cells */
+
+#score-table td.active-col {
+  background-color: #263659;
+
+  border-left: 1px solid #405a94;
+  border-right: 1px solid #405a94;
+}
+
+/* Active column hover */
+
+#score-table tbody
+tr:not(.section-heading):hover td.active-col {
+  background-color: #354a78;
+}
+
+
+/* ============================================================
+   11. SECTIONS AND TOTALS
+   ============================================================ */
+
+/* Upper subtotal / bonus rows */
+
+#score-table tr.summary td {
+  background-color: #26334f;
+  font-weight: 600;
+}
+
+#score-table tr.summary td.active-col {
+  background-color: #34466d;
+}
+
+#score-table tr.summary td:first-child {
+  color: #d7e5ff;
+}
+
+/* Section separator */
+
+#score-table tr.section-start td {
+  border-top: 3px solid #53698f;
+}
+
+/* Lower-section heading */
+
+#score-table tr.section-heading th {
+  background-color: #111e33;
+  color: #8fb3ff;
+
+  padding: 13px 16px;
+
+  text-align: left;
+
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+
+  border-top: 3px solid #53698f;
+  border-bottom: 2px solid #405373;
+}
+
+/* Grand total row */
+
+#score-table tr.grand-total td {
+  background-color: #263e63;
+  color: #ffffff;
+
+  font-weight: 800;
+  font-size: 1.1rem;
+
+  border-top: 3px solid #7197dc;
+}
+
+#score-table tr.grand-total td.active-col {
+  background-color: #365590;
+  color: #ffffff;
+}
+
+#score-table tr.grand-total td:first-child {
+  color: #ffdc7d;
+}
+
+
+/* ============================================================
+   12. SCORING BUTTONS
+   ============================================================ */
+
+#score-table .score-btn {
+  width: 100%;
+  min-height: 34px;
+
+  padding: 6px 8px;
+
+  background: #34476d;
+  color: white;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    filter 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+#score-table .score-btn:hover:not(:disabled) {
+  background: #4d63a0;
+
+  filter: brightness(1.1);
+  transform: scale(1.04);
+}
+
+#score-table .score-btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+/* Best available immediate score */
+
+#score-table .score-btn.best-option {
+  border: 2px solid #f0c75e;
+
+  box-shadow:
+    0 0 0 2px rgba(240, 199, 94, 0.16);
+
+  position: relative;
+}
+
+#score-table .score-btn.best-option::after {
+  content: "Best";
+
+  margin-left: 6px;
+
+  font-size: 0.68rem;
+  font-weight: 800;
+  vertical-align: middle;
+}
+
+/* Empty values and potential scores */
+
+.empty {
+  color: #75839f;
+}
+
+.potential {
+  font-size: 0.7rem;
+  display: block;
+  opacity: 0.8;
+}
+
+
+/* ============================================================
+   13. WINNER ANNOUNCEMENT
+   ============================================================ */
+
+#status {
+  text-align: center;
+
+  font-weight: 700;
+  color: #f2c66c;
+
+  min-height: 30px;
+}
+
+
+/* ============================================================
+   14. RESPONSIVE DESIGN
+   ============================================================ */
+
+@media (max-width: 650px) {
+
+  #dice {
+    gap: 10px;
+  }
+
+  #dice .die {
+    width: 82px;
+    height: 100px;
+    min-height: 100px;
+
+    padding: 5px 3px 7px;
+
+    border-radius: 14px;
+    gap: 3px;
+  }
+
+  #dice .die-face {
+    font-size: 3.7rem;
+  }
+
+  #dice .die-status {
+    font-size: 0.58rem;
+    min-height: 18px;
+    padding: 2px 6px;
+  }
+
+  #score-table th,
+  #score-table td {
+    padding: 9px 6px;
+    font-size: 0.8rem;
+  }
+
+  #score-table tr.grand-total td {
+    font-size: 0.9rem;
+  }
+
+  #score-table tr.section-heading th {
+    font-size: 0.7rem;
+  }
+
+  #score-table .score-btn {
+    font-size: 0.75rem;
+    padding: 6px 8px;
+  }
+
+}
+
+@media (max-width: 580px) {
+
+  body {
+    padding: 12px;
+  }
+
+}
+
+
+/* ============================================================
+   15. ACCESSIBILITY
+   ============================================================ */
+
+/* Keyboard focus */
+
+#score-table .score-btn:focus-visible,
+#dice .die:focus-visible {
+  outline: 3px solid #ffdb7b;
+  outline-offset: 3px;
+}
+
+/* Reduced motion preference */
+
+@media (prefers-reduced-motion: reduce) {
+
+  #dice .die,
+  #score-table th,
+  #score-table td,
+  #score-table .score-btn {
+    transition: none;
+  }
+
+  #dice .die.rolling-die {
+    animation: none;
+  }
+
+}
+
+
+/* ============================================================
+   YAHTZEE V1.4 - GAMEPLAY UI ENHANCEMENTS
+   ============================================================ */
+
+
+/* ============================================================
+   1. EXTRA GAME CONTROL BUTTONS
+   ============================================================ */
+
+.actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Undo last score button */
+
+#undo-score {
+  background: #33415f;
+  color: #e5edff;
+
+  border: 1px solid #58698c;
+
+  font-size: 0.9rem;
+  font-weight: 700;
+
+  padding: 11px 16px;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+#undo-score:hover:not(:disabled) {
+  background: #465b80;
+  transform: translateY(-2px);
+}
+
+#undo-score:disabled {
+  background: #242d42;
+  color: #7c89a3;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+/* ============================================================
+   2. REMATCH BUTTON
+   ============================================================ */
+
+#rematch {
+  background: #274c48;
+  color: #c9fff0;
+
+  border: 1px solid #438b79;
+
+  font-size: 0.9rem;
+  font-weight: 700;
+
+  padding: 11px 16px;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+#rematch:hover:not(:disabled) {
+  background: #356c60;
+  transform: translateY(-2px);
+}
+
+#rematch:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+
+/* ============================================================
+   3. TURN ANNOUNCEMENT BANNER
+   ============================================================ */
+
+.turn-banner {
+  margin: 14px auto 18px;
+
+  width: fit-content;
+  max-width: 100%;
+
+  padding: 13px 28px;
+
+  background: #283d70;
+  color: #e4edff;
+
+  border: 1px solid #668af0;
+  border-radius: 14px;
+
+  box-shadow:
+    0 6px 22px rgba(54, 96, 206, 0.2);
+
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+/* Ensure the HTML hidden attribute works. */
+
+.turn-banner[hidden] {
+  display: none !important;
+}
+
+/* Entrance animation */
+
+.turn-banner.show {
+  animation: turnBannerEnter 0.35s ease-out both;
+}
+
+@keyframes turnBannerEnter {
+  0% {
+    opacity: 0;
+
+    transform:
+      translateY(-12px)
+      scale(0.96);
+  }
+
+  100% {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+/* ============================================================
+   4. SCORING BUTTON STATES
+   ============================================================ */
+
+/* Visually disable scores during dice animations */
+
+#score-table .score-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Highlight the highest immediate scoring option */
+
+#score-table .score-btn.best-option {
+  border: 2px solid #f0c75e;
+
+  box-shadow:
+    0 0 0 2px rgba(240, 199, 94, 0.18);
+}
+
+/* Clear visual feedback when clicking */
+
+#score-table .score-btn:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+
+/* ============================================================
+   5. ACCESSIBILITY
+   ============================================================ */
+
+#undo-score:focus-visible,
+#rematch:focus-visible {
+  outline: 3px solid #ffdb7b;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .turn-banner.show {
+    animation: none;
+  }
+
+  #undo-score,
+  #rematch {
+    transition: none;
+  }
+}
+
+
+/* ============================================================
+   6. MOBILE RESPONSIVENESS
+   ============================================================ */
+
+@media (max-width: 650px) {
+  .actions {
+    gap: 8px;
+  }
+
+  #undo-score,
+  #rematch {
+    font-size: 0.78rem;
+    padding: 10px 12px;
+  }
+
+  .turn-banner {
+    font-size: 0.95rem;
+    padding: 11px 18px;
+  }
+}
+
+
+
+/* ============================================================
+   YAHTZEE V1.4.1
+   CONFETTI, POPUPS, WINNER SCREEN AND SETTINGS
+   ============================================================ */
+
+
+/* ============================================================
+   1. SETTINGS BUTTON
+   ============================================================ */
+
+#settings-button {
+  flex-shrink: 0;
+  background: #283750;
+  color: #eaf0ff;
+  border: 1px solid #4c5d7d;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+}
+
+#settings-button:hover {
+  background: #354966;
+}
+
+
+/* ============================================================
+   2. MODAL BACKDROP
+   ============================================================ */
+
+body.modal-open {
+  overflow: hidden;
+}
+
+.game-modal {
+  position: fixed;
+  inset: 0;
+
+  z-index: 1000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px;
+
+  background: rgba(4, 9, 22, 0.8);
+  backdrop-filter: blur(7px);
+}
+
+.game-modal[hidden] {
+  display: none !important;
+}
+
+
+/* ============================================================
+   3. MODAL PANEL
+   ============================================================ */
+
+.modal-panel {
+  position: relative;
+
+  width: 100%;
+  max-width: 460px;
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  background: #1a243b;
+  color: #eaf0ff;
+
+  padding: 32px 28px;
+
+  border: 1px solid #4e6085;
+  border-radius: 22px;
+
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.5);
+
+  text-align: center;
+
+  animation: modalEnter 0.3s ease-out;
+}
+
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* ============================================================
+   4. MODAL CONTENT
+   ============================================================ */
+
+.modal-icon {
+  font-size: 3.5rem;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.modal-panel h2 {
+  font-size: 1.6rem;
+  margin: 0 0 12px;
+}
+
+.modal-description {
+  color: #b9c9e8;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0 0 24px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+
+  width: 34px;
+  height: 34px;
+
+  padding: 0;
+
+  display: grid;
+  place-items: center;
+
+  background: #2a3752;
+  color: #c8d5ec;
+
+  border-radius: 50%;
+
+  font-size: 1rem;
+}
+
+.modal-close:hover {
+  background: #435576;
+}
+
+
+/* ============================================================
+   5. MODAL BUTTONS
+   ============================================================ */
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  margin-top: 20px;
+}
+
+.modal-actions button {
+  flex: 1;
+  min-width: 125px;
+
+  padding: 12px 18px;
+  border-radius: 10px;
+
+  font-weight: 700;
+}
+
+.modal-actions .secondary {
+  background: #33415f;
+}
+
+.modal-actions .secondary:hover {
+  background: #465878;
+}
+
+.danger-button {
+  background: #bd4b58;
+}
+
+.danger-button:hover:not(:disabled) {
+  background: #d85e6b;
+}
+
+
+/* ============================================================
+   6. SETTINGS TOGGLES
+   ============================================================ */
+
+.setting-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+
+  padding: 16px 0;
+
+  border-bottom: 1px solid #34415b;
+
+  cursor: pointer;
+  text-align: left;
+}
+
+.setting-row span {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.setting-row strong {
+  color: #eaf0ff;
+  font-size: 0.95rem;
+}
+
+.setting-row small {
+  color: #aebbd4;
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+/* Toggle switch */
+
+.setting-row input[type="checkbox"] {
+  appearance: none;
+
+  position: relative;
+
+  width: 48px;
+  height: 27px;
+
+  min-width: 48px;
+
+  margin: 0;
+  padding: 0;
+
+  background: #4b5872;
+
+  border: 1px solid #64718c;
+  border-radius: 999px;
+
+  cursor: pointer;
+
+  transition: background-color 0.2s ease;
+}
+
+/* Toggle circle */
+
+.setting-row input[type="checkbox"]::before {
+  content: "";
+
+  position: absolute;
+  top: 3px;
+  left: 3px;
+
+  width: 19px;
+  height: 19px;
+
+  background: #ffffff;
+  border-radius: 50%;
+
+  transition: transform 0.2s ease;
+}
+
+/* Enabled toggle */
+
+.setting-row input[type="checkbox"]:checked {
+  background: #6f7dff;
+  border-color: #8390ff;
+}
+
+.setting-row input[type="checkbox"]:checked::before {
+  transform: translateX(20px);
+}
+
+
+/* ============================================================
+   7. WINNER SCREEN
+   ============================================================ */
+
+.winner-title {
+  color: #ffdc7b;
+
+  font-size: 2rem !important;
+  font-weight: 900;
+
+  letter-spacing: 1px;
+
+  text-shadow:
+    0 0 18px rgba(255, 220, 123, 0.2);
+}
+
+.winner-name {
+  color: #ffffff;
+
+  font-size: 1.5rem;
+  font-weight: 800;
+
+  margin: 0 0 14px;
+
+  overflow-wrap: anywhere;
+}
+
+.winner-scores {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  margin-top: 16px;
+}
+
+.winner-score-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+
+  padding: 14px 18px;
+
+  background: #243149;
+
+  border: 1px solid #35445f;
+  border-radius: 12px;
+
+  text-align: left;
+}
+
+.winner-score-row span {
+  overflow-wrap: anywhere;
+}
+
+.winner-score-row strong {
+  font-size: 1.25rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.winner-score-row.winning-player {
+  background: #344b75;
+  border-color: #d7b35b;
+}
+
+.winner-score-row.winning-player strong {
+  color: #ffdc7b;
+}
+
+
+/* ============================================================
+   8. CONFETTI LAYER
+   ============================================================ */
+
+#celebration-layer {
+  position: fixed;
+  inset: 0;
+
+  z-index: 2000;
+
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -20px;
+
+  width: 10px;
+  height: 16px;
+
+  border-radius: 2px;
+
+  animation-name: confettiFall;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes confettiFall {
+  0% {
+    opacity: 1;
+
+    transform:
+      translate3d(0, -20px, 0)
+      rotate(0deg);
+  }
+
+  100% {
+    opacity: 0;
+
+    transform:
+      translate3d(var(--drift), 110vh, 0)
+      rotate(850deg);
+  }
+}
+
+
+/* ============================================================
+   9. YAHTZEE CELEBRATION ANNOUNCEMENT
+   ============================================================ */
+
+.yahtzee-celebration {
+  position: absolute;
+
+  top: 34%;
+  left: 50%;
+
+  width: min(90vw, 480px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  padding: 25px 20px;
+
+  color: #ffdc7b;
+  text-align: center;
+
+  background: rgba(19, 28, 49, 0.94);
+
+  border: 2px solid #e4b849;
+  border-radius: 20px;
+
+  box-shadow:
+    0 0 50px rgba(255, 203, 74, 0.3);
+
+  animation: yahtzeePop 3s ease-out forwards;
+}
+
+.yahtzee-celebration strong {
+  font-size: clamp(1.8rem, 6vw, 3rem);
+  line-height: 1.2;
+  font-weight: 900;
+}
+
+.yahtzee-celebration span {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+@keyframes yahtzeePop {
+  0% {
+    opacity: 0;
+    transform:
+      translate(-50%, -50%)
+      scale(0.5);
+  }
+
+  12% {
+    opacity: 1;
+    transform:
+      translate(-50%, -50%)
+      scale(1.12);
+  }
+
+  22% {
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+
+  80% {
+    opacity: 1;
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate(-50%, -60%)
+      scale(0.94);
+  }
+}
+
+
+/* ============================================================
+   10. ACCESSIBILITY
+   ============================================================ */
+
+.modal-panel button:focus-visible,
+.setting-row input:focus-visible,
+#settings-button:focus-visible {
+  outline: 3px solid #ffdb7b;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal-panel,
+  .yahtzee-celebration,
+  .confetti-piece {
+    animation: none;
+  }
+
+  .setting-row input,
+  .setting-row input::before {
+    transition: none;
+  }
+}
+
+
+/* ============================================================
+   11. MOBILE
+   ============================================================ */
+
+@media (max-width: 650px) {
+  .modal-panel {
+    padding: 28px 18px;
+  }
+
+  .modal-panel h2 {
+    font-size: 1.4rem;
+  }
+
+  .winner-name {
+    font-size: 1.2rem;
+  }
+
+  .winner-score-row {
+    padding: 12px;
+  }
+
+  #settings-button {
+    font-size: 0.8rem;
+    padding: 8px 11px;
+  }
+
+  .setting-row {
+    gap: 12px;
+  }
+}
+
+
+
+/* ============================================================
+   YAHTZEE V1.5A - STATISTICS DASHBOARD
+   ============================================================ */
+
+/* Statistics button in the header */
+
+#statistics-button {
+  flex-shrink: 0;
+  background: #263d55;
+  color: #e4efff;
+  border: 1px solid #50748b;
+  font-size: 0.9rem;
+  padding: 10px 16px;
+}
+
+#statistics-button:hover {
+  background: #365875;
+}
+
+/* Expand modal width for statistics */
+
+.game-modal:has(.stats-heading) .modal-panel {
+  max-width: 680px;
+}
+
+/* Header */
+
+.stats-heading {
+  text-align: left;
+  margin: 4px 0 24px;
+}
+
+.stats-heading h2 {
+  margin: 0 0 6px;
+  color: #f3f6ff;
+  font-size: 1.5rem;
+}
+
+.stats-heading p {
+  color: #aebbd4;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Section headings */
+
+.stats-section-title {
+  margin: 26px 0 12px;
+  color: #c3d5ff;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: left;
+}
+
+/* Leaderboard */
+
+.stats-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.stats-player-card {
+  background: #222e47;
+  border: 1px solid #405173;
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.stats-player-card:first-child {
+  border-color: #a98b4c;
+  background: #293950;
+}
+
+.stats-player-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.stats-player-heading strong {
+  color: #ffffff;
+  font-size: 1.05rem;
+  overflow-wrap: anywhere;
+}
+
+.stats-player-heading span {
+  color: #ffdc7b;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* Player metrics grid */
+
+.stats-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.stats-metric {
+  background: #172238;
+  padding: 11px 7px;
+  border-radius: 9px;
+  text-align: center;
+  min-width: 0;
+}
+
+.stats-metric small {
+  display: block;
+  color: #aebbd4;
+  font-size: 0.7rem;
+  margin-bottom: 7px;
+}
+
+.stats-metric strong {
+  display: block;
+  color: #f3f6ff;
+  font-size: 1.1rem;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+/* Recent match cards */
+
+.stats-history-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+
+  padding: 14px 16px;
+  background: #222e47;
+  border: 1px solid #3b4b68;
+  border-radius: 12px;
+
+  color: #edf2ff;
+  text-align: left;
+}
+
+.stats-history-item > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.stats-history-item strong {
+  overflow-wrap: anywhere;
+}
+
+.stats-history-item small {
+  color: #aebbd4;
+  font-size: 0.78rem;
+}
+
+.stats-history-item > strong {
+  flex-shrink: 0;
+  color: #ffdc7b;
+  white-space: nowrap;
+}
+
+.stats-history-button {
+  cursor: pointer;
+  font: inherit;
+}
+
+.stats-history-button:hover:not(:disabled) {
+  background: #314361;
+  border-color: #6f8cc0;
+}
+
+.stats-empty {
+  color: #aebbd4;
+  padding: 20px;
+  text-align: center;
+  background: #202b42;
+  border-radius: 12px;
+}
+
+.stats-footer {
+  margin: 22px 0 0;
+  color: #899bb7;
+  font-size: 0.78rem;
+}
+
+.stats-back {
+  display: block;
+  margin-bottom: 20px;
+  font-size: 0.85rem;
+}
+
+/* Player selection */
+
+.profile-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0 0 14px;
+}
+
+.profile-picker label {
+  color: #aebbd4;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.profile-picker select {
+  padding: 10px 12px;
+  background: #15213a;
+  border: 1px solid #526484;
+  color: #edf2ff;
+}
+
+.name-input[readonly] {
+  opacity: 0.7;
+  cursor: default;
+}
+
+/* Focus states */
+
+#statistics-button:focus-visible,
+.stats-history-button:focus-visible,
+.profile-picker select:focus-visible {
+  outline: 3px solid #ffdb7b;
+  outline-offset: 3px;
+}
+
+/* Responsive layout */
+
+@media (max-width: 650px) {
+  #statistics-button {
+    font-size: 0.78rem;
+    padding: 8px 10px;
+  }
+
+  .stats-player-card {
+    padding: 12px;
+  }
+
+  .stats-metrics-grid {
+    gap: 6px;
+  }
+
+  .stats-metric {
+    padding: 9px 4px;
+  }
+
+  .stats-metric strong {
+    font-size: 0.92rem;
+  }
+
+  .stats-metric small {
+    font-size: 0.63rem;
+  }
+
+  .stats-history-item {
+    padding: 11px;
+    gap: 8px;
+  }
+
+  .stats-history-item > strong {
+    font-size: 0.85rem;
+  }
+}
+
+
+
+/* ============================================================
+   YAHTZEE V1.5A.1 - PROFILE MANAGEMENT
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   PROFILE DROPDOWN WITH DELETE BUTTON
+   ------------------------------------------------------------ */
+
+.profile-picker-controls {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  width: 100%;
+}
+
+.profile-picker-controls .profile-select {
+  flex: 1;
+  min-width: 0;
+  width: auto;
+}
+
+.profile-delete-button {
+  flex-shrink: 0;
+
+  width: 46px;
+  min-height: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px;
+
+  background: #472b39;
+  color: #ffb3bd;
+
+  border: 1px solid #a14d61;
+  border-radius: 10px;
+
+  font-size: 1.15rem;
+
+  cursor: pointer;
+}
+
+.profile-delete-button:hover:not(:disabled) {
+  background: #743547;
+  color: #ffffff;
+}
+
+.profile-delete-button:disabled {
+  background: #293247;
+  color: #78849c;
+  border-color: #3d4961;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ------------------------------------------------------------
+   DELETE BUTTON IN STATISTICS
+   ------------------------------------------------------------ */
+
+.stats-delete-button {
+  width: 100%;
+
+  margin-top: 14px;
+  padding: 10px 12px;
+
+  background: #462b39;
+  color: #ffb5bf;
+
+  border: 1px solid #995365;
+  border-radius: 9px;
+
+  font-size: 0.83rem;
+  font-weight: 700;
+}
+
+.stats-delete-button:hover:not(:disabled) {
+  background: #743c4b;
+  color: #ffffff;
+}
+
+/* ------------------------------------------------------------
+   PROFILE VALIDATION ERROR
+   ------------------------------------------------------------ */
+
+.profile-error {
+  margin: 0;
+
+  color: #ffadb8;
+  font-size: 0.86rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.profile-error:empty {
+  display: none;
+}
+
+/* ------------------------------------------------------------
+   KEYBOARD ACCESSIBILITY
+   ------------------------------------------------------------ */
+
+.profile-delete-button:focus-visible,
+.stats-delete-button:focus-visible {
+  outline: 3px solid #ffdc7b;
+  outline-offset: 3px;
+}
+
+/* ------------------------------------------------------------
+   MOBILE
+   ------------------------------------------------------------ */
+
+@media (max-width: 650px) {
+  .profile-picker-controls {
+    gap: 7px;
+  }
+
+  .profile-delete-button {
+    width: 42px;
+    min-height: 42px;
+  }
+}
+
+
+/* ============================================================
+   YAHTZEE V1.5B
+   RIVALRIES, ACHIEVEMENTS AND PERSONAL RECORDS
+   ============================================================ */
+
+/* ============================================================
+   1. HEADER
+   ============================================================ */
+
+header {
+  flex-wrap: wrap;
+}
+
+header > div:first-child {
+  margin-right: auto;
+}
+
+header button {
+  white-space: nowrap;
+}
+
+#rivalries-button {
+  flex-shrink: 0;
+
+  background: #354064;
+  color: #eaf0ff;
+
+  border: 1px solid #6879a4;
+  border-radius: 10px;
+
+  padding: 10px 15px;
+
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+#rivalries-button:hover:not(:disabled) {
+  background: #475780;
+}
+
+/* ============================================================
+   2. DASHBOARD MODAL
+   ============================================================ */
+
+.game-modal:has(.plus-heading) .modal-panel {
+  max-width: 720px;
+}
+
+.plus-heading {
+  text-align: left;
+  margin-bottom: 24px;
+}
+
+.plus-heading h2 {
+  margin: 0 0 8px;
+
+  color: #ffffff;
+  font-size: 1.5rem;
+}
+
+.plus-heading p {
+  margin: 0;
+
+  color: #aebbd4;
+  font-size: 0.9rem;
+}
+
+.plus-section-title {
+  margin: 26px 0 14px;
+
+  color: #c7d7ff;
+  font-size: 1.05rem;
+  font-weight: 800;
+
+  text-align: left;
+}
+
+/* ============================================================
+   3. PLAYER SELECTORS
+   ============================================================ */
+
+.plus-selectors {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+
+  margin-bottom: 18px;
+}
+
+.plus-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  margin-bottom: 14px;
+  text-align: left;
+}
+
+.plus-field label {
+  color: #b5c5e5;
+
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.plus-select {
+  width: 100%;
+  min-width: 0;
+
+  padding: 10px 12px;
+
+  background: #111d34;
+  color: #ffffff;
+
+  border: 1px solid #526589;
+  border-radius: 9px;
+}
+
+/* ============================================================
+   4. HEAD-TO-HEAD RESULTS
+   ============================================================ */
+
+.plus-h2h-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.plus-h2h-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+
+  min-width: 0;
+  padding: 18px 12px;
+
+  background: #233451;
+
+  border: 1px solid #405b89;
+  border-radius: 13px;
+}
+
+.plus-h2h-player span {
+  color: #edf3ff;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.plus-h2h-player strong {
+  color: #ffdc7b;
+
+  font-size: 2.5rem;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+
+.plus-h2h-player small {
+  color: #aebbd4;
+  font-size: 0.75rem;
+}
+
+/* Wins and ties distribution bar */
+
+.plus-progress {
+  display: flex;
+
+  height: 12px;
+  margin: 16px 0 22px;
+
+  background: #33415b;
+
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.plus-progress-a {
+  background: #2ca77c;
+}
+
+.plus-progress-ties {
+  background: #b6a371;
+}
+
+.plus-progress-b {
+  background: #7787e9;
+}
+
+/* ============================================================
+   5. PERSONAL RECORDS GRID
+   ============================================================ */
+
+.plus-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.plus-metric {
+  min-width: 0;
+  padding: 14px 10px;
+
+  background: #202e47;
+
+  border: 1px solid #354765;
+  border-radius: 11px;
+
+  text-align: center;
+}
+
+.plus-metric small {
+  display: block;
+
+  color: #aebbd4;
+  font-size: 0.76rem;
+
+  margin-bottom: 8px;
+}
+
+.plus-metric strong {
+  display: block;
+
+  color: #f3f6ff;
+  font-size: 1.12rem;
+
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+/* ============================================================
+   6. ACHIEVEMENT CARDS
+   ============================================================ */
+
+.plus-achievement-count {
+  margin: 22px 0 14px;
+
+  color: #f6d47d;
+
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.plus-achievements {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.plus-achievement {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+
+  min-width: 0;
+  padding: 18px 12px;
+
+  background: #243149;
+
+  border: 1px solid #435572;
+  border-radius: 14px;
+
+  text-align: center;
+}
+
+.plus-achievement.unlocked {
+  background: #35415a;
+  border-color: #d4ac55;
+}
+
+.plus-achievement.locked {
+  opacity: 0.55;
+}
+
+.plus-achievement-icon {
+  font-size: 2.3rem;
+}
+
+.plus-achievement strong {
+  color: #ffffff;
+  font-size: 0.95rem;
+}
+
+.plus-achievement small {
+  color: #b9c8e4;
+
+  font-size: 0.76rem;
+  line-height: 1.5;
+}
+
+.plus-achievement-status {
+  margin-top: auto;
+  padding: 5px 10px;
+
+  background: #1a2941;
+  color: #becbe0;
+
+  border-radius: 999px;
+
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.plus-achievement.unlocked .plus-achievement-status {
+  color: #ffe097;
+  background: #574925;
+}
+
+/* ============================================================
+   7. EXPORT AND EMPTY STATES
+   ============================================================ */
+
+.plus-empty {
+  padding: 20px;
+
+  background: #1d2940;
+  color: #aebbd4;
+
+  border-radius: 12px;
+  text-align: center;
+}
+
+.plus-note {
+  color: #91a2bd;
+
+  font-size: 0.78rem;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.plus-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  margin-top: 28px;
+  padding-top: 22px;
+
+  border-top: 1px solid #34415b;
+}
+
+.plus-footer button {
+  background: #304461;
+  border: 1px solid #59779e;
+}
+
+.plus-export-status {
+  color: #a5e5c0;
+  font-size: 0.82rem;
+  margin: 0;
+}
+
+.plus-export-status:empty {
+  display: none;
+}
+
+/* ============================================================
+   8. RESPONSIVE AND ACCESSIBILITY
+   ============================================================ */
+
+.plus-select:focus-visible,
+#rivalries-button:focus-visible,
+.plus-footer button:focus-visible {
+  outline: 3px solid #ffdb7b;
+  outline-offset: 3px;
+}
+
+@media (max-width: 650px) {
+  #rivalries-button {
+    font-size: 0.78rem;
+    padding: 8px 10px;
+  }
+
+  .plus-h2h-player strong {
+    font-size: 2rem;
+  }
+
+  .plus-metric {
+    padding: 11px 7px;
+  }
+
+  .plus-metric strong {
+    font-size: 0.95rem;
+  }
+
+  .plus-achievement {
+    padding: 14px 8px;
+  }
+
+  .plus-achievement strong {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .plus-achievements {
+    grid-template-columns: 1fr;
+  }
+
+  .plus-selectors {
+    gap: 8px;
+  }
+}
+
+
+
+/* ============================================================
+   YAHTZEE V1.6 — FINAL RELEASE STYLES
+   Append to the END of style.css
+   ============================================================ */
+
+/* Hide the game when the home screen is visible. */
+
+.app[hidden],
+#home-screen[hidden] {
+  display: none !important;
+}
+
+/* ============================================================
+   1. HOME SCREEN
+   ============================================================ */
+
+#home-screen {
+  min-height: 100vh;
+
+  display: grid;
+  place-items: center;
+
+  padding: 24px;
+
+  background:
+    radial-gradient(
+      circle at 50% 12%,
+      rgba(111, 125, 255, 0.24),
+      transparent 43%
+    ),
+    #0e1425;
+}
+
+.home-shell {
+  width: min(100%, 730px);
+
+  padding: clamp(26px, 6vw, 56px);
+
+  border: 1px solid #485a85;
+  border-radius: 28px;
+
+  background: rgba(25, 36, 59, 0.96);
+
+  box-shadow:
+    0 28px 80px rgba(0, 0, 0, 0.3);
+
+  text-align: center;
+}
+
+.home-eyebrow {
+  margin: 0 0 14px;
+
+  color: #acbdf0;
+
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.home-shell h1 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: clamp(2.2rem, 7vw, 4rem);
+  letter-spacing: -0.05em;
+}
+
+.home-shell h1 span {
+  color: #ffd77c;
+}
+
+.home-tagline {
+  margin: 14px 0 32px;
+
+  color: #b6c7e9;
+  line-height: 1.6;
+}
+
+.home-actions,
+.home-menu {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.home-actions {
+  margin-bottom: 20px;
+}
+
+.home-actions button {
+  min-height: 56px;
+  font-size: 1rem;
+}
+
+.home-menu button {
+  min-height: 48px;
+
+  background: #2a3a59;
+  border: 1px solid #4a608b;
+}
+
+.home-menu button:hover:not(:disabled) {
+  background: #384d76;
+}
+
+.home-notice {
+  min-height: 1.4em;
+
+  margin: 17px 0 0;
+
+  color: #ffcf96;
+  font-size: 0.88rem;
+}
+
+.home-footnote {
+  margin: 15px 0 0;
+
+  color: #91a4c7;
+  font-size: 0.78rem;
+}
+
+#home-button {
+  background: #30405b;
+  border: 1px solid #586b95;
+  font-size: 0.9rem;
+}
+
+/* ============================================================
+   2. ADDITIONAL SETTINGS
+   ============================================================ */
+
+.v16-settings {
+  margin: 16px 0 0;
+}
+
+.v16-theme-setting {
+  margin-top: 18px;
+  text-align: left;
+}
+
+.v16-theme-setting > strong {
+  display: block;
+
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+}
+
+.v16-theme-picker {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.v16-theme-picker button {
+  min-width: 0;
+
+  padding: 10px 5px;
+
+  background: #283850;
+
+  border: 2px solid transparent;
+
+  font-size: 0.78rem;
+}
+
+.v16-theme-picker button[aria-pressed="true"] {
+  background: #35496f;
+
+  border-color: #ffd77c;
+  color: #ffffff;
+}
+
+/* ============================================================
+   3. CASINO THEME
+   ============================================================ */
+
+body.theme-casino {
+  background: #081a15;
+  color: #ebf5ea;
+}
+
+.theme-casino #home-screen {
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(30, 126, 87, 0.28),
+      transparent 48%
+    ),
+    #081a15;
+}
+
+.theme-casino .home-shell,
+.theme-casino .setup,
+.theme-casino .turnbar,
+.theme-casino .modal-panel,
+.theme-casino #score-table {
+  background: #15372c;
+  color: #ebf5ea;
+}
+
+.theme-casino .home-shell {
+  border-color: #6e9e75;
+}
+
+.theme-casino #score-table th {
+  background: #245341;
+}
+
+.theme-casino #score-table td.active-col,
+.theme-casino #score-table th.active-col {
+  background: #2d684f;
+}
+
+.theme-casino #score-table tr.summary td {
+  background: #244c3d;
+}
+
+.theme-casino #score-table tr.section-heading th {
+  background: #09271d;
+  color: #f5d98e;
+}
+
+.theme-casino #score-table tr.grand-total td {
+  background: #325f44;
+}
+
+.theme-casino .home-menu button,
+.theme-casino .secondary {
+  background: #285c48;
+  color: #eff8ed;
+}
+
+.theme-casino #home-play,
+.theme-casino #roll,
+.theme-casino .modal-actions button:not(.secondary):not(
+    .danger-button
+  ) {
+  background: #ffbd42;
+  color: #111b14;
+}
+
+.theme-casino .score-btn {
+  background: #327159;
+}
+
+.theme-casino .stats-player-card,
+.theme-casino .plus-metric,
+.theme-casino .plus-achievement {
+  background: #204536;
+}
+
+.theme-casino #home-screen h1 span {
+  color: #f5d98e;
+}
+
+/* ============================================================
+   4. ARCADE THEME
+   ============================================================ */
+
+body.theme-arcade {
+  background: #190e2d;
+  color: #f5edff;
+}
+
+.theme-arcade #home-screen {
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(225, 72, 186, 0.25),
+      transparent 47%
+    ),
+    #190e2d;
+}
+
+.theme-arcade .home-shell,
+.theme-arcade .setup,
+.theme-arcade .turnbar,
+.theme-arcade .modal-panel,
+.theme-arcade #score-table {
+  background: #2e1c49;
+  color: #f5edff;
+}
+
+.theme-arcade .home-shell {
+  border-color: #ad68d7;
+}
+
+.theme-arcade #score-table th {
+  background: #463065;
+}
+
+.theme-arcade #score-table th.active-col,
+.theme-arcade #score-table td.active-col {
+  background: #65408a;
+}
+
+.theme-arcade #score-table tr.summary td {
+  background: #453060;
+}
+
+.theme-arcade #score-table tr.section-heading th {
+  background: #26123d;
+  color: #ffb2e4;
+}
+
+.theme-arcade #score-table tr.grand-total td {
+  background: #643d85;
+}
+
+.theme-arcade .home-menu button,
+.theme-arcade .secondary {
+  background: #593779;
+  color: #f9efff;
+}
+
+.theme-arcade #home-play,
+.theme-arcade #roll,
+.theme-arcade .modal-actions button:not(.secondary):not(
+    .danger-button
+  ) {
+  background: #b64ad6;
+}
+
+.theme-arcade .score-btn {
+  background: #7147a0;
+}
+
+.theme-arcade .stats-player-card,
+.theme-arcade .plus-metric,
+.theme-arcade .plus-achievement {
+  background: #45305d;
+}
+
+.theme-arcade #home-screen h1 span {
+  color: #ffa5db;
+}
+
+/* ============================================================
+   5. PRESERVE READABLE HELD DICE
+   ============================================================ */
+
+body.theme-casino #dice .die.held,
+body.theme-arcade #dice .die.held {
+  background: linear-gradient(
+    180deg,
+    #fff7da,
+    #f6e7b1
+  );
+
+  border-color: #d9b34a;
+}
+
+/* ============================================================
+   6. RESPONSIVENESS
+   ============================================================ */
+
+@media (max-width: 600px) {
+  #home-screen {
+    padding: 12px;
+  }
+
+  .home-shell {
+    padding: 28px 18px;
+  }
+
+  .home-actions,
+  .home-menu {
+    grid-template-columns: 1fr;
+  }
+
+  .home-actions button {
+    min-height: 48px;
+  }
+
+  .home-tagline {
+    margin-bottom: 22px;
+  }
+
+  .v16-theme-picker {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   7. ACCESSIBILITY
+   ============================================================ */
+
+#home-screen button:focus-visible,
+.v16-theme-picker button:focus-visible {
+  outline: 3px solid #ffdb7b;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-shell *,
+  .v16-theme-picker button {
+    transition: none;
+  }
+}
+
+
+/* ============================================================
+   YAHTZEE V1.6.1 - FINAL UI POLISH
+
+   1. Theme colors
+   2. Header and navigation
+   3. Centered game setup
+   4. Player cards
+   5. Profile controls
+   6. Start button
+   7. Responsive layout
+   ============================================================ */
+
+
+/* ============================================================
+   1. THEME COLORS
+   ============================================================ */
+
+:root {
+  --setup-bg: #1a243b;
+  --setup-card: #202d47;
+  --setup-border: #425375;
+  --setup-text: #eaf0ff;
+  --setup-muted: #aebbd4;
+  --setup-accent: #7886ff;
+}
+
+body.theme-casino {
+  --setup-bg: #15372c;
+  --setup-card: #204536;
+  --setup-border: #4b8567;
+  --setup-text: #eff8ed;
+  --setup-muted: #b1d4c1;
+  --setup-accent: #f9ba45;
+}
+
+body.theme-arcade {
+  --setup-bg: #2e1c49;
+  --setup-card: #251738;
+  --setup-border: #71508f;
+  --setup-text: #f5edff;
+  --setup-muted: #c5b1de;
+  --setup-accent: #a47aff;
+}
+
+
+/* ============================================================
+   2. HEADER AND NAVIGATION
+   ============================================================ */
+
+.app {
+  max-width: 1240px;
+}
+
+.app > .app-header {
+  display: grid;
+
+  grid-template-columns:
+    minmax(220px, 1fr)
+    auto;
+
+  align-items: center;
+  gap: 20px;
+
+  margin-bottom: 30px;
+  padding: 12px 0 24px;
+
+  border-bottom: 1px solid
+    var(--setup-border);
+}
+
+/* Brand */
+
+.app-header .brand-block {
+  min-width: 0;
+}
+
+.app-header .brand-block h1 {
+  margin: 0;
+
+  font-size: clamp(
+    1.6rem,
+    3vw,
+    2.3rem
+  );
+
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.app-header .brand-block p {
+  margin: 7px 0 0;
+
+  font-size: 0.9rem;
+  color: var(--setup-muted);
+}
+
+/* Navigation container */
+
+.app-header .header-actions {
+  display: flex;
+
+  align-items: center;
+  justify-content: flex-end;
+
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+/* Navigation buttons */
+
+.app-header .header-actions button {
+  padding: 10px 14px;
+
+  min-height: 42px;
+
+  border-radius: 10px;
+
+  font-size: 0.83rem;
+  font-weight: 700;
+
+  white-space: nowrap;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.app-header .header-actions
+button:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+/* No need for New Game while already on setup */
+
+.app:has(#setup:not([hidden]))
+#new-game {
+  display: none;
+}
+
+
+/* ============================================================
+   3. CENTERED GAME SETUP
+   ============================================================ */
+
+#setup {
+  width: 100%;
+  max-width: 1100px;
+
+  margin: 38px auto 60px;
+
+  padding: clamp(
+    24px,
+    4vw,
+    48px
+  );
+
+  display: grid;
+  gap: 26px;
+
+  background: var(--setup-bg);
+  color: var(--setup-text);
+
+  border: 1px solid var(--setup-border);
+  border-radius: 24px;
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.18);
+}
+
+#setup[hidden] {
+  display: none !important;
+}
+
+/* Setup heading */
+
+#setup .setup-intro {
+  text-align: center;
+}
+
+#setup .setup-eyebrow {
+  margin: 0 0 12px;
+
+  color: var(--setup-accent);
+
+  font-size: 0.76rem;
+  font-weight: 900;
+
+  letter-spacing: 2px;
+}
+
+#setup .setup-intro h2 {
+  margin: 0 0 12px;
+
+  font-size: clamp(
+    1.8rem,
+    4vw,
+    2.7rem
+  );
+
+  font-weight: 900;
+  letter-spacing: -0.035em;
+}
+
+#setup .setup-description {
+  margin: 0;
+
+  color: var(--setup-muted);
+
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Player count selector */
+
+#setup .setup-config {
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+
+  gap: 10px;
+}
+
+#setup .setup-config label {
+  color: var(--setup-muted);
+
+  font-size: 0.8rem;
+  font-weight: 800;
+
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+#setup #player-count {
+  width: 100%;
+  max-width: 260px;
+
+  min-height: 48px;
+
+  padding: 11px 15px;
+
+  background: #111d34;
+  color: #ffffff;
+
+  border: 1px solid #586b92;
+  border-radius: 12px;
+
+  cursor: pointer;
+}
+
+
+/* ============================================================
+   4. PLAYER CARD GRID
+   ============================================================ */
+
+#name-fields {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 18px;
+}
+
+/* Three cards across for three players */
+
+#name-fields[data-players="3"] {
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+}
+
+/* Individual player card */
+
+.player-card {
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+
+  min-width: 0;
+  height: 100%;
+
+  padding: 22px;
+
+  background: var(--setup-card);
+
+  border: 1px solid var(--setup-border);
+  border-radius: 18px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.player-card:hover {
+  border-color: var(--setup-accent);
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.12);
+
+  transform: translateY(-2px);
+}
+
+/* Player heading */
+
+.player-card-heading {
+  display: flex;
+
+  align-items: center;
+  gap: 12px;
+
+  margin-bottom: 12px;
+}
+
+.player-avatar {
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 12px;
+
+  background: rgba(130, 140, 240, 0.16);
+
+  font-size: 1.35rem;
+}
+
+.player-card-heading h3 {
+  margin: 0;
+
+  color: var(--setup-text);
+
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+/* Field labels */
+
+.player-card > label,
+.player-card .profile-picker label {
+  color: var(--setup-muted);
+
+  font-size: 0.78rem;
+  font-weight: 800;
+
+  letter-spacing: 0.3px;
+}
+
+/* Name input */
+
+#setup .player-card .name-input {
+  width: 100%;
+  min-height: 48px;
+
+  margin: 0 0 10px;
+
+  padding: 11px 14px;
+
+  background: #111d34;
+  color: #ffffff;
+
+  border: 1px solid #526484;
+  border-radius: 11px;
+
+  font-size: 0.95rem;
+}
+
+/* Existing profile name */
+
+#setup .player-card
+.name-input[readonly] {
+  background: #192943;
+  color: #d5e3ff;
+
+  opacity: 1;
+}
+
+/* Focus states */
+
+#setup .name-input:focus,
+#setup .profile-select:focus,
+#setup #player-count:focus {
+  outline: none;
+
+  border-color: var(--setup-accent);
+
+  box-shadow:
+    0 0 0 3px rgba(120, 134, 255, 0.18);
+}
+
+
+/* ============================================================
+   5. PLAYER PROFILE CONTROLS
+   ============================================================ */
+
+#setup .player-card .profile-picker {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+
+  margin: 0;
+  margin-top: auto;
+}
+
+#setup .player-card
+.profile-picker-controls {
+  display: flex;
+  align-items: stretch;
+
+  gap: 8px;
+}
+
+#setup .player-card .profile-select {
+  flex: 1;
+
+  width: 100%;
+  min-width: 0;
+  min-height: 47px;
+
+  padding: 10px 12px;
+
+  background: #111d34;
+  color: #ffffff;
+
+  border: 1px solid #526484;
+  border-radius: 11px;
+
+  font-size: 0.85rem;
+}
+
+/* Delete selected profile */
+
+#setup .player-card
+.profile-delete-button {
+  flex-shrink: 0;
+
+  width: 46px;
+  min-height: 47px;
+
+  padding: 8px;
+
+  border-radius: 11px;
+}
+
+/* Setup validation errors */
+
+#setup .profile-error {
+  color: #ffb5bf;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+
+/* ============================================================
+   6. START MATCH BUTTON
+   ============================================================ */
+
+#setup .setup-footer {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 16px;
+}
+
+#setup .setup-footer p {
+  margin: 0;
+
+  color: var(--setup-muted);
+  font-size: 0.88rem;
+
+  text-align: center;
+}
+
+#setup #start {
+  width: 100%;
+  max-width: 360px;
+
+  min-height: 54px;
+
+  padding: 14px 24px;
+
+  background: #6f7dff;
+  color: #ffffff;
+
+  border: none;
+  border-radius: 13px;
+
+  font-size: 1.08rem;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 24px rgba(95, 110, 255, 0.22);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+#setup #start:hover:not(:disabled) {
+  transform: translateY(-3px);
+
+  background: #8792ff;
+
+  box-shadow:
+    0 12px 30px rgba(95, 110, 255, 0.3);
+}
+
+/* Theme-specific button colors */
+
+.theme-casino #setup #start {
+  background: #ffb52b;
+  color: #111b14;
+}
+
+.theme-casino #setup #start:hover {
+  background: #b69146;
+}
+
+.theme-arcade #setup #start {
+  background: #a45cd4;
+  color: #ffffff;
+}
+
+.theme-arcade #setup #start:hover {
+  background: #bb73e6;
+}
+
+
+/* ============================================================
+   7. RESPONSIVE DESIGN
+   ============================================================ */
+
+@media (max-width: 1050px) {
+  .app > .app-header {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .app-header .header-actions {
+    justify-content: flex-start;
+  }
+
+  #name-fields[data-players="3"] {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  #setup {
+    margin: 20px auto 40px;
+    padding: 24px 16px;
+    gap: 22px;
+  }
+
+  #name-fields,
+  #name-fields[data-players="3"] {
+    grid-template-columns: 1fr;
+  }
+
+  .player-card {
+    padding: 18px;
+  }
+
+  .app-header .header-actions {
+    gap: 7px;
+  }
+
+  .app-header .header-actions button {
+    min-height: 38px;
+
+    padding: 8px 11px;
+    font-size: 0.77rem;
+  }
+}
+
+/* Disable card movements for reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .player-card,
+  #setup #start,
+  .app-header .header-actions button {
+    transition: none;
+  }
+
+  .player-card:hover,
+  #setup #start:hover {
+    transform: none;
+  }
+}
+
+
+/* ============================================================
+   YAHTZEE V1.6.3 - RELEASE ALL BUTTON
+   ============================================================ */
+
+#dice .release-all-btn {
+  flex: 0 0 122px;
+
+  min-height: 62px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  padding: 10px;
+
+  background: #334461;
+  color: #ffffff;
+
+  border: 1px solid #7189b3;
+  border-radius: 14px;
+
+  font-size: 0.8rem;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+#dice .release-all-btn:hover:not(:disabled) {
+  background: #47618a;
+  transform: translateY(-3px);
+}
+
+#dice .release-all-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+#dice .release-all-btn span:first-child {
+  font-size: 1.4rem;
+}
+
+#dice .release-all-btn:focus-visible {
+  outline: 3px solid #ffdb7b;
+  outline-offset: 3px;
+}
+
+/* Small screens: put the button below the dice. */
+
+@media (max-width: 650px) {
+  #dice .release-all-btn {
+    flex-basis: 100%;
+    max-width: 190px;
+    min-height: 48px;
+
+    flex-direction: row;
+  }
+}
+
+
+/* ============================================================
+   YAHTZEE V1.6.4 - FOOTER
+   ============================================================ */
+
+/* Page layout: keep footer at the bottom */
+
+body {
+  display: flex;
+  flex-direction: column;
+
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  padding: 0;
+}
+
+/* Maintain spacing around the main game */
+
+.app {
+  flex: 1 0 auto;
+  width: 100%;
+
+  margin: 0 auto;
+  padding: 22px;
+}
+
+/* Home screen shares the available height */
+
+#home-screen {
+  flex: 1 0 auto;
+  width: 100%;
+  min-height: 0;
+}
+
+/* Footer appearance */
+
+#site-footer {
+  flex-shrink: 0;
+
+  width: 100%;
+  margin-top: auto;
+  padding: 18px 20px 22px;
+
+  text-align: center;
+
+  background: transparent;
+  border-top: 1px solid rgba(180, 195, 230, 0.12);
+}
+
+#site-footer p {
+  margin: 0 0 5px;
+
+  color: #aebbd4;
+  font-size: 0.85rem;
+}
+
+#site-footer strong {
+  color: #eaf0ff;
+  font-weight: 700;
+}
+
+#site-footer .footer-heart {
+  color: #ff7694;
+}
+
+#site-footer small {
+  color: #8290ab;
+  font-size: 0.72rem;
+}
+
+/* Adapt footer colors to selected theme */
+
+.theme-casino #site-footer strong {
+  color: #f5d98e;
+}
+
+.theme-arcade #site-footer strong {
+  color: #f4b0ff;
+}
+
+/* Mobile layout */
+
+@media (max-width: 580px) {
+  .app {
+    padding: 12px;
+  }
+
+  #site-footer {
+    padding: 16px 12px;
+  }
+
+  #site-footer p {
+    font-size: 0.78rem;
+  }
+}
