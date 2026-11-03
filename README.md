@@ -27,12 +27,6 @@ Play with **2 or 3 people on one device**. Roll animated dice, hold your favorit
 | --- | --- |
 | ![Leaderboard and match history](screenshots/statistics.png) | ![Head-to-head comparison and achievements](screenshots/rivalries.png) |
 
-<details>
-<summary>Settings preview</summary>
-
-![Game settings, themes, and sound options](screenshots/settings.png)
-
-</details>
 
 ## ✨ Features
 
