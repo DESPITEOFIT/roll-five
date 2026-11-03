@@ -2,7 +2,7 @@
 'use strict';
 
 // ============================================================
-// YAHTZEE LOCAL - VERSION 1.4.1
+// ROLL FIVE - VERSION 1.4.1
 // Celebrations, custom dialogs, settings and autosave
 // ============================================================
 
@@ -23,7 +23,7 @@ const CATEGORIES = [
   ['fullHouse', 'Full house'],
   ['smallStraight', 'Small straight'],
   ['largeStraight', 'Large straight'],
-  ['yahtzee', 'Yahtzee'],
+  ['yahtzee', 'Five Of A Kind'],
   ['chance', 'Chance']
 ];
 
